@@ -1,0 +1,21 @@
+package com.guanmac.calculator;
+
+import android.content.Context;
+import android.widget.ViewSwitcher;
+
+/**
+ * 提供了垂直滚动的输入结果框
+ * 
+ * @author Administrator
+ * 
+ */
+class calculatorDisplay extends ViewSwitcher
+{
+
+	public calculatorDisplay(Context context)
+	{
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+
+}
