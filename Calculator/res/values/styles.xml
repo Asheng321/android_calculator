@@ -16,7 +16,11 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
+    
+	<style name="button_small_style" parent="button_style">
+       <item name="android:textSize">30dp</item>
+    </style>
+    
     <!-- 显示结果的editText风格 -->
     <style name="display_style">
         <item name="android:textSize">40sp</item>

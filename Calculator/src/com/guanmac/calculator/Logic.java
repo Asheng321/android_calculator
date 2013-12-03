@@ -141,20 +141,9 @@ public class Logic
 	}
 
 	/**
-	 * 清空
-	 */
-	public void cleared()
-	{
-		// TODO Auto-generated method stub
-		mResult = "";
-		mIsError = false;
-		updateHistory();
-	}
-
-	/**
 	 * 更新历史记录，调用History的方法
 	 */
-	private void updateHistory()
+	void updateHistory()
 	{
 		// TODO Auto-generated method stub
 		mHistory.update(getText());
@@ -179,18 +168,6 @@ public class Logic
 			mDisplay.dispatchKeyEvent(new KeyEvent(0, KeyEvent.KEYCODE_DEL));
 			mResult = "";
 		}
-	}
-
-	/**
-	 * 清空显示框内容
-	 * 
-	 * @param scroll
-	 */
-	private void clear(boolean scroll)
-	{
-		mDisplay.setText("", scroll ? CalculatorDisplay.Scroll.UP
-				: CalculatorDisplay.Scroll.NONE);
-		cleared();
 	}
 
 	// 输入内容时
@@ -236,5 +213,34 @@ public class Logic
 	{
 		// TODO Auto-generated method stub
 		mDisplay.setText(text, CalculatorDisplay.Scroll.UP);
+	}
+
+	public void onClear()
+	{
+		// TODO Auto-generated method stub
+		clear(false);
+	}
+
+	/**
+	 * 清空
+	 */
+	public void cleared()
+	{
+		// TODO Auto-generated method stub
+		mResult = "";
+		mIsError = false;
+		updateHistory();
+	}
+
+	/**
+	 * 清空显示框内容
+	 * 
+	 * @param scroll
+	 */
+	private void clear(boolean scroll)
+	{
+		mDisplay.setText("", scroll ? CalculatorDisplay.Scroll.UP
+				: CalculatorDisplay.Scroll.NONE);
+		cleared();
 	}
 }

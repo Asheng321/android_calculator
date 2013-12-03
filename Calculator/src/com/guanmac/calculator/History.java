@@ -74,7 +74,7 @@ public class History
 	/**
 	 * 设置新的历史记录，记录变更后需要通知适配器页面做出改变
 	 */
-	private void clear()
+	void clear()
 	{
 		// TODO Auto-generated method stub
 		mEntries.clear();
@@ -85,12 +85,17 @@ public class History
 	}
 
 	/**
-	 * 通知更新 适配器要通知页面，记录已改变需要更新
+	 * 通知更新 适配器要通知页面，记录已改变需要更新 使用notifyDataSetInvalidated()是因为这个方法通知观察器数据更新了，
+	 * 只重绘当前可见区域
 	 */
 	private void notifyChanged()
 	{
 		// TODO Auto-generated method stub
-		mObserver.notifyDataSetInvalidated();
+		if (mObserver != null)
+		{
+
+			mObserver.notifyDataSetInvalidated();
+		}
 	}
 
 	/**

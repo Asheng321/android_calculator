@@ -25,21 +25,51 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int blue_button=0x7f020000;
-        public static final int button=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static final int advanced=0x7f020000;
+        public static final int blue_button=0x7f020001;
+        public static final int button=0x7f020002;
+        public static final int clear_history=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int simple=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f090009;
+        public static final int action_settings=0x7f090023;
+        public static final int advancedPad=0x7f090016;
+        public static final int cos=0x7f090018;
         public static final int del=0x7f090001;
+        public static final int digit0=0x7f090013;
+        public static final int digit1=0x7f090010;
+        public static final int digit2=0x7f090011;
+        public static final int digit3=0x7f090012;
+        public static final int digit4=0x7f09000a;
+        public static final int digit5=0x7f09000b;
+        public static final int digit6=0x7f09000c;
         public static final int digit7=0x7f090004;
         public static final int digit8=0x7f090005;
         public static final int digit9=0x7f090006;
         public static final int display=0x7f090000;
-        public static final int historyExpr=0x7f090007;
-        public static final int historyResult=0x7f090008;
+        public static final int div=0x7f09000e;
+        public static final int dot=0x7f09000d;
+        public static final int e=0x7f09001e;
+        public static final int equal=0x7f090014;
+        public static final int factorial=0x7f09001b;
+        public static final int historyExpr=0x7f090021;
+        public static final int historyResult=0x7f090022;
+        public static final int leftParen=0x7f090007;
+        public static final int lg=0x7f09001d;
+        public static final int ln=0x7f09001c;
+        public static final int minus=0x7f09000f;
+        public static final int mul=0x7f090009;
         public static final int panelswitch=0x7f090002;
+        public static final int pi=0x7f09001a;
+        public static final int plus=0x7f090015;
+        public static final int power=0x7f09001f;
+        public static final int rightParen=0x7f090008;
         public static final int simplePad=0x7f090003;
+        public static final int sin=0x7f090017;
+        public static final int sqrt=0x7f090020;
+        public static final int tan=0x7f090019;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -49,7 +79,6 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int Ln=0x7f06001c;
         public static final int action_settings=0x7f060001;
         public static final int advanced=0x7f060024;
         public static final int app_name=0x7f060000;
@@ -78,6 +107,7 @@ public final class R {
         public static final int hello_world=0x7f060002;
         public static final int leftParen=0x7f06001e;
         public static final int lg=0x7f06001d;
+        public static final int ln=0x7f06001c;
         public static final int minus=0x7f060013;
         public static final int mul=0x7f060011;
         public static final int pi=0x7f06001a;
@@ -115,10 +145,11 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
-        public static final int button_style=0x7f070003;
-        public static final int digit_button_style=0x7f070004;
+        public static final int button_small_style=0x7f070002;
+        public static final int button_style=0x7f070004;
+        public static final int digit_button_style=0x7f070005;
         /**  显示结果的editText风格 
          */
-        public static final int display_style=0x7f070002;
+        public static final int display_style=0x7f070003;
     }
 }

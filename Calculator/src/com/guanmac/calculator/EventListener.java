@@ -1,12 +1,16 @@
 package com.guanmac.calculator;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 
-public class EventListener implements OnClickListener, OnLongClickListener
+public class EventListener implements OnClickListener, OnLongClickListener,
+		OnKeyListener
 {
+	private static final char[] EQUAL = { '=' };
 	Logic mHandler;
 	PanelSwitcher mPanelSwitcher;
 
@@ -43,7 +47,7 @@ public class EventListener implements OnClickListener, OnLongClickListener
 				if (mPanelSwitcher != null
 						&& mPanelSwitcher.getCurrentIndex() == Calculator.ADVANCED_PANEL)
 				{
-					mPanelSwitcher.moveRigth();
+					mPanelSwitcher.moveRight();
 				}
 			}
 		}
@@ -51,6 +55,19 @@ public class EventListener implements OnClickListener, OnLongClickListener
 
 	@Override
 	public boolean onLongClick(View v)
+	{
+		// TODO Auto-generated method stub
+		int id = v.getId();
+		if (id == R.id.del)
+		{
+			mHandler.onClear();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onKey(View arg0, int arg1, KeyEvent arg2)
 	{
 		// TODO Auto-generated method stub
 		return false;
