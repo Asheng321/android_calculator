@@ -137,4 +137,16 @@ public class History
 	{
 		return current().getBase();
 	}
+
+	public void update(String text)
+	{
+		// TODO Auto-generated method stub
+		current().setEdited(text);
+	}
+
+	public void enter(String text)
+	{
+		// TODO Auto-generated method stub
+
+	}
 }

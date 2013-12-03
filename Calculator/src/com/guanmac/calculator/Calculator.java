@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 public class Calculator extends Activity
 {
+	EventListener mListener = new EventListener();
 	private static final int HVGA_WIDTH_PIXELS = 320;
 
 	@Override

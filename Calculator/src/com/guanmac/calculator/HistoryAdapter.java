@@ -64,27 +64,39 @@ public class HistoryAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View view;
-		// TODO Auto-generated method stub
-		if (convertView == null)
+		try
 		{
-			view = mInflater.inflate(R.layout.history_item, parent, false);
+			View view;
+			// TODO Auto-generated method stub
+			if (convertView == null)
+			{
+				view = mInflater.inflate(R.layout.history_item, parent, false);
+			}
+			else
+			{
+				view = convertView;
+			}
+			// 表达式 tv
+			TextView expr = (TextView) view.findViewById(R.id.historyExpr);
+			// 结果tv
+			TextView result = (TextView) view.findViewById(R.id.historyResult);
+
+			HistoryEntry entry = mEntries.elementAt(position);
+
+			String base = entry.getBase();
+			expr.setText(base);
+			String re;
+
+			re = mEval.evaluate(base);
+
+			result.setText("=" + re);
+			return view;
 		}
-		else
+		catch (SyntaxException e)
 		{
-			view = convertView;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		// 表达式 tv
-		TextView expr = (TextView) view.findViewById(R.id.historyExpr);
-		// 结果tv
-		TextView result = (TextView) view.findViewById(R.id.historyResult);
-
-		HistoryEntry entry = mEntries.elementAt(position);
-
-		String base = entry.getBase();
-		expr.setText(base);
-		String re = mEval.evaluate(base);
-		result.setText("=" + re);
-		return view;
+		return convertView;
 	}
 }

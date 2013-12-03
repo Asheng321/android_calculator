@@ -168,4 +168,31 @@ class CalculatorDisplay extends ViewSwitcher
 		EditText text = (EditText) this.getCurrentView();
 		return text.getText();
 	}
+
+	/**
+	 * 获得选择的开始序号
+	 * 
+	 * @return
+	 */
+	public int getSelectionStart()
+	{
+		// TODO Auto-generated method stub
+		EditText text = (EditText) this.getCurrentView();
+
+		return text.getSelectionStart();
+	}
+
+	/**
+	 * 对当前editText插入字符
+	 * 
+	 * @param text
+	 */
+	public void insert(String text)
+	{
+		// TODO Auto-generated method stub
+		EditText editor = (EditText) getCurrentView();
+		// 在头部插入
+		int cursor = editor.getSelectionStart();
+		editor.getText().insert(cursor, text);
+	}
 }

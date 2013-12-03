@@ -1,8 +1,10 @@
 package com.guanmac.calculator;
 
 import org.javia.arity.Symbols;
+import org.javia.arity.SyntaxException;
 import org.javia.arity.Util;
 import android.content.Context;
+import android.view.KeyEvent;
 import android.widget.Button;
 
 public class Logic
@@ -28,6 +30,8 @@ public class Logic
 	static final char MINUS = '\u2212';
 	// 存储错误信息
 	private final String mErrorString;
+
+	private static final int ROUND_DIGITS = 1;
 
 	/**
 	 * 为何会有个button; 构造函数
@@ -61,22 +65,29 @@ public class Logic
 	 * 
 	 * @param input
 	 * @return
+	 * @throws SyntaxException
 	 */
-	public String evaluate(String input)
+	public String evaluate(String input) throws SyntaxException
 	{
 		// 当input为空时，返回空
 		if (input.trim().equals(""))
 			return "";
 		int size = input.length();
-		//直到表达式最后一个字符不是操作符，
-		//把表达式赋给input,这是input就成了不带=的表达式
-		while(size>0 && isOperator(input.charAt(size-1)))
+		// 直到表达式最后一个字符不是操作符，
+		// 把表达式赋给input,这是input就成了不带=的表达式
+		while (size > 0 && isOperator(input.charAt(size - 1)))
 		{
-			input = input.substring(0, size-1);
+			input = input.substring(0, size - 1);
 			--size;
 		}
-		String result = Util.doubleToString(arg0, arg1)
-		return null;
+		String result = Util.doubleToString(mSymbols.eval(input), mLineLength,
+				ROUND_DIGITS);
+		if (result.equals(NAN))
+		{
+			mIsError = true;
+			return mErrorString;
+		}
+		return result.replace('-', MINUS).replace(INFINITY, INFINITY_UNICODE);
 	}
 
 	/**
@@ -100,9 +111,130 @@ public class Logic
 	/**
 	 * 判断是否是操作符
 	 */
-	public boolean isOperator(char c)
+	public static boolean isOperator(char c)
 	{
 		// plus minus times div
 		return "+\u2212\u00d7\u00f7/*".indexOf(c) != -1;
+	}
+
+	/**
+	 * 检测是不是可接受的输入 输入框内容不等于delta;delta不是操作符；光标所在位置不是输入框内容的长度。
+	 * 
+	 * @param delta
+	 * @return
+	 */
+	public boolean acceptInsert(String delta)
+	{
+		// TODO Auto-generated method stub
+		String text = getText();
+		return !mIsError
+				&& (!mResult.equals(text) || isOperator(delta) || mDisplay
+						.getSelectionStart() != text.length());
+	}
+
+	/**
+	 * 获得显示框的内容
+	 */
+	private String getText()
+	{
+		return mDisplay.getText().toString();
+	}
+
+	/**
+	 * 清空
+	 */
+	public void cleared()
+	{
+		// TODO Auto-generated method stub
+		mResult = "";
+		mIsError = false;
+		updateHistory();
+	}
+
+	/**
+	 * 更新历史记录，调用History的方法
+	 */
+	private void updateHistory()
+	{
+		// TODO Auto-generated method stub
+		mHistory.update(getText());
+	}
+
+	// 在显示框中插入数据
+	public void insert(String text)
+	{
+		// TODO Auto-generated method stub
+		mDisplay.insert(text);
+	}
+
+	public void onDelete()
+	{
+		// TODO Auto-generated method stub
+		if (getText().equals(mResult) || mIsError)
+		{
+			clear(false);
+		}
+		else
+		{
+			mDisplay.dispatchKeyEvent(new KeyEvent(0, KeyEvent.KEYCODE_DEL));
+			mResult = "";
+		}
+	}
+
+	/**
+	 * 清空显示框内容
+	 * 
+	 * @param scroll
+	 */
+	private void clear(boolean scroll)
+	{
+		mDisplay.setText("", scroll ? CalculatorDisplay.Scroll.UP
+				: CalculatorDisplay.Scroll.NONE);
+		cleared();
+	}
+
+	// 输入内容时
+	public void onEnter()
+	{
+		// TODO Auto-generated method stub
+		String text = getText();
+		if (text.equals(mResult))
+		{
+			// 在输入一个结果之后清空
+			clearWithHistory(false);
+		}
+		else
+		{
+			mHistory.enter(text);
+			try
+			{
+				mResult = evaluate(text);
+			}
+			catch (SyntaxException e)
+			{
+				mIsError = true;
+				mResult = mErrorString;
+			}
+			if (text.equals(mResult))
+			{
+				// 没有需要显示的结果，
+				clearWithHistory(true);
+			}
+			else
+			{
+				setText(mResult);
+			}
+		}
+	}
+
+	/**
+	 * 设置显示框内容
+	 * 
+	 * @param mResult2
+	 */
+	private void setText(String text)
+	{
+		// TODO Auto-generated method stub
+		mDisplay.setText(text, CalculatorDisplay.Scroll.UP);
 	}
 }
