@@ -43,6 +43,7 @@ public class EventListener implements OnClickListener, OnLongClickListener,
 				{
 					text += '(';
 				}
+				// ÃÓ»Î
 				mHandler.insert(text);
 				if (mPanelSwitcher != null
 						&& mPanelSwitcher.getCurrentIndex() == Calculator.ADVANCED_PANEL)

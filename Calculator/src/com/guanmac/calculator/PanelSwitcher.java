@@ -116,6 +116,9 @@ public class PanelSwitcher extends FrameLayout
 		}
 	}
 
+	/**
+	 * 使当前视图不可见，让上一个视图可见
+	 */
 	public void moveRight()
 	{
 		if (mCurrentView > 0 && mPreviousMove != RIGHT)
@@ -141,6 +144,7 @@ public class PanelSwitcher extends FrameLayout
 	}
 
 	/**
+	 * 当View中所有的子控件均被映射成xml后触发，譬如说 view v= inflater.inflater(R.xml.xxx)后，就会被调用。
 	 * 初始化mChildren，把页面放入数组
 	 */
 	@Override
@@ -156,7 +160,7 @@ public class PanelSwitcher extends FrameLayout
 	}
 
 	/**
-	 * 初始化TranslateAnimation
+	 * 当页面大小改变时调用 初始化TranslateAnimation
 	 * 
 	 * @param w
 	 * @param h

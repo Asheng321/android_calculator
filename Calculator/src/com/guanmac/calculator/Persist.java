@@ -37,6 +37,7 @@ public class Persist
 
 	/**
 	 * 加载文件中的历史记录(dataInputStream)，放去History中。
+	 * history的实例化会把dataInputStream的数据放入一个Vector中
 	 */
 	private void load()
 	{

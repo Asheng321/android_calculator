@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class Calculator extends Activity
 {
+	// 用于菜单子项
 	private static final int CMD_CLEAR_HISTORY = 1;
 	private static final int CMD_BASIC_PANEL = 2;
 	private static final int CMD_ADVANCED_PANEL = 3;
