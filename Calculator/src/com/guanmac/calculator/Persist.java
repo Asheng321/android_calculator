@@ -22,7 +22,7 @@ public class Persist
 	private static final String FILE_NAME = "calculator.data";
 	private Context mContext;
 
-	History history = new History();
+	private History history = new History();
 
 	/**
 	 * 在构造的时候进行读取文件加载历史记录
@@ -47,7 +47,7 @@ public class Persist
 					mContext.openFileInput(FILE_NAME), 8192);
 			DataInputStream in = new DataInputStream(is);
 			int version = in.readInt();
-			if (version > this.LAST_VERSION)
+			if (version > Persist.LAST_VERSION)
 			{
 				throw new IOException("data version" + version + ");expected"
 						+ LAST_VERSION);
@@ -85,5 +85,11 @@ public class Persist
 		{
 
 		}
+	}
+
+	public History getHistory()
+	{
+		// TODO Auto-generated method stub
+		return this.history;
 	}
 }

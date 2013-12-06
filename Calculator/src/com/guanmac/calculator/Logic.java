@@ -11,8 +11,6 @@ public class Logic
 {
 
 	private CalculatorDisplay mDisplay;
-	private Symbols mSymbols = new Symbols();
-
 	private History mHistory;
 	private String mResult = "";
 
@@ -69,6 +67,7 @@ public class Logic
 	 */
 	public String evaluate(String input) throws SyntaxException
 	{
+
 		// 当input为空时，返回空
 		if (input.trim().equals(""))
 			return "";
@@ -80,8 +79,8 @@ public class Logic
 			input = input.substring(0, size - 1);
 			--size;
 		}
-		String result = Util.doubleToString(mSymbols.eval(input), mLineLength,
-				ROUND_DIGITS);
+		String result = Util.doubleToString(new Symbols().eval(input),
+				mLineLength, ROUND_DIGITS);
 		if (result.equals(NAN))
 		{
 			mIsError = true;

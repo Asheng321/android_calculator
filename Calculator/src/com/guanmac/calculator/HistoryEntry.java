@@ -12,11 +12,15 @@ import java.io.IOException;
  */
 public class HistoryEntry
 {
+	// 记录版本号
 	private static final int VERSION_1 = 1;
 	// 用于记录整条方程
 	private String mBase;
 	private String mEdited;
 
+	/**
+	 * 调用clearEdited()方法把mBase和mEdited复制为传入参数
+	 */
 	public HistoryEntry(String string)
 	{
 		// TODO Auto-generated constructor stub
@@ -24,6 +28,10 @@ public class HistoryEntry
 		clearEdited();
 	}
 
+	/**
+	 * 当传入的版本号大于静态版本号，就读入in中的输入，否则抛出错误
+	 * 
+	 */
 	public HistoryEntry(int version, DataInputStream in) throws IOException
 	{
 		// TODO Auto-generated constructor stub
@@ -39,7 +47,7 @@ public class HistoryEntry
 	}
 
 	/**
-	 * 未解
+	 * 该函数在初始化函数中调用。 把base的内容复制给mEdited
 	 */
 	public void clearEdited()
 	{
@@ -71,7 +79,7 @@ public class HistoryEntry
 
 	public void setBase(String Base)
 	{
-		this.mBase = mBase;
+		this.mBase = Base;
 	}
 
 	public String getEdited()
@@ -81,6 +89,6 @@ public class HistoryEntry
 
 	public void setEdited(String Edited)
 	{
-		this.mEdited = mEdited;
+		this.mEdited = Edited;
 	}
 }

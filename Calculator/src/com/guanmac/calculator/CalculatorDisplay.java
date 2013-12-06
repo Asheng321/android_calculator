@@ -13,7 +13,8 @@ import android.widget.ViewSwitcher;
 
 /**
  * 提供了垂直滚动的输入结果框。ViewSwitcher适用于两个视图带动画的切换。
- * CalculatorDisplay带有两个EditText作为输入数字与结果之间的转换
+ * CalculatorDisplay带有两个EditText作为输入数字与结果之间的转换 * 该类用于两个视图转换时做一些动画。
+ * 一个ViewSwitcher只允许包含两个子视图，且一次仅显示一次
  * 
  * @author Administrator
  * 
@@ -46,6 +47,23 @@ class CalculatorDisplay extends ViewSwitcher
 	{
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 在尺寸改变的时候进行透明度动画初始化
+	 */
+	@Override
+	protected void onSizeChanged(int w, int h, int oldW, int oldH)
+	{
+		inAnimUp = new TranslateAnimation(0, 0, h, 0);
+		inAnimUp.setDuration(ANIM_DURATION);
+		outAnimUp = new TranslateAnimation(0, 0, 0, -h);
+		outAnimUp.setDuration(ANIM_DURATION);
+
+		inAnimDown = new TranslateAnimation(0, 0, -h, 0);
+		inAnimDown.setDuration(ANIM_DURATION);
+		outAnimDown = new TranslateAnimation(0, 0, 0, h);
+		outAnimDown.setDuration(ANIM_DURATION);
 	}
 
 	/**
@@ -140,6 +158,7 @@ class CalculatorDisplay extends ViewSwitcher
 		{
 			this.setInAnimation(inAnimUp);
 			this.setOutAnimation(outAnimUp);
+
 		}
 		else if (dir == Scroll.DOWN)
 		{

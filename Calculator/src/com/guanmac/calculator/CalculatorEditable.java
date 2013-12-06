@@ -75,7 +75,6 @@ public class CalculatorEditable extends SpannableStringBuilder
 	/**
 	 * 未解之谜
 	 */
-
 	private SpannableStringBuilder internalReplace(int start, int end,
 			String delta)
 	{
@@ -116,7 +115,7 @@ public class CalculatorEditable extends SpannableStringBuilder
 				return super.replace(start, end, "");
 
 			}
-			// 禁止两个操作符
+			// 禁止两个减号
 			if (Logic.isOperator(text))
 			{
 				while (Logic.isOperator(prevChar)

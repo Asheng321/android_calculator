@@ -10,21 +10,24 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 /**
- * 历史记录适配器
+ * 历史记录适配器 实例化HistoryAdapter传入history只是为了获得history的vector。
+ * 传入Logic只是为了获得计算方法eval()
  * 
  * @author Administrator
  * 
  */
 public class HistoryAdapter extends BaseAdapter
 {
+	// 记录History传入的数据
 	private Vector<HistoryEntry> mEntries;
 	// 用来找 res/layout 下的 xml 布局文件，并且实例化
 	private LayoutInflater mInflater;
+	// 出入Logic只是为了计算结果（evaluate）
 	private Logic mEval;
 
 	HistoryAdapter(Context context, History history, Logic evaluator)
 	{
-		mEntries = history.mEntries;
+		mEntries = history.getEntries();
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mEval = evaluator;
@@ -86,7 +89,6 @@ public class HistoryAdapter extends BaseAdapter
 			String base = entry.getBase();
 			expr.setText(base);
 			String re;
-
 			re = mEval.evaluate(base);
 
 			result.setText("=" + re);

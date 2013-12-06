@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 
+/**
+ * @author Administrator
+ * 
+ */
 public class PanelSwitcher extends FrameLayout
 {
 

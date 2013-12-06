@@ -28,6 +28,16 @@ public class History
 	BaseAdapter mObserver;
 
 	/**
+	 * 返回vector
+	 * 
+	 * @return
+	 */
+	public Vector<HistoryEntry> getEntries()
+	{
+		return this.mEntries;
+	}
+
+	/**
 	 * 首次初始化时，先进行清空
 	 */
 	public History()
@@ -36,6 +46,7 @@ public class History
 	}
 
 	/**
+	 * 当版本号大于静态版本号时，循环dataInputStream,把内容实例化一个HistoryEntry,并且加入到vector中
 	 * 
 	 * @param version
 	 *            版本号
@@ -149,9 +160,28 @@ public class History
 		current().setEdited(text);
 	}
 
+	/**
+	 * 增加一条历史记录。当存储长度大于最大长度时，把这条记录存储到0这个位置（覆盖前面）。
+	 * 当存储长度小于2，或者存储的内容不等于第一条时（即为空）,就把这条记录存储。 通知适配器已经改变
+	 * 
+	 * @param text
+	 */
 	public void enter(String text)
 	{
 		// TODO Auto-generated method stub
-
+		current().clearEdited();
+		if (mEntries.size() >= MAX_ENTRIES)
+		{
+			mEntries.remove(0);
+		}
+		if (mEntries.size() < 2
+				|| !text.equals(mEntries.elementAt(mEntries.size() - 2)
+						.getBase()))
+		{
+			mEntries.insertElementAt(new HistoryEntry(text),
+					mEntries.size() - 1);
+		}
+		mPos = mEntries.size() - 1;
+		notifyChanged();
 	}
 }

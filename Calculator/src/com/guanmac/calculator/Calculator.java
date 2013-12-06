@@ -2,8 +2,6 @@ package com.guanmac.calculator;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Config;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
@@ -22,10 +20,6 @@ public class Calculator extends Activity
 	public static final int BASIC_PANEL = 0;
 	public static final int ADVANCED_PANEL = 1;
 
-	private static final String LOG_TAG = "Calculator";
-	private static final boolean DEBUG = false;
-	private static final boolean LOG_ENABLED = DEBUG ? Config.LOGD
-			: Config.LOGV;
 	private static final String STATE_CURRENT_VIEW = "state-current-view";
 
 	EventListener mListener = new EventListener();
@@ -42,9 +36,12 @@ public class Calculator extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		// 实例化Persist时，会生成一个history类。
 		mPersist = new Persist(this);
-		mHistory = mPersist.history;
+		mHistory = mPersist.getHistory();
+
+		// 实例化HistoryAdapter传入history只是为了获得history的vector。
+		// 传入Logic只是为了获得计算方法eval()
 		HistoryAdapter historyAdapter = new HistoryAdapter(this, mHistory,
 				mLogic);
 		mHistory.setObserver(historyAdapter);
@@ -68,6 +65,9 @@ public class Calculator extends Activity
 		}
 	}
 
+	/**
+	 * 这个函数只执行一次，用于初始化
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -87,6 +87,9 @@ public class Calculator extends Activity
 		return true;
 	}
 
+	/**
+	 * 这个函数在menu每次改变时都会调用。在这里进行进行菜单子项隐藏
+	 */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu)
 	{
@@ -101,6 +104,9 @@ public class Calculator extends Activity
 		return true;
 	}
 
+	/**
+	 * 当点击菜单时，会调用这个函数
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -145,18 +151,9 @@ public class Calculator extends Activity
 		mPersist.save();
 	}
 
-	static void log(String message)
-	{
-		if (LOG_ENABLED)
-		{
-			Log.v(LOG_TAG, message);
-		}
-	}
-
 	/**
-	 * 在布局文件中的字体大小被指定为HVGA显示屏。 调整字体的大小相应地，如果我们不同的显示器上运行。
+	 * 在布局文件中的字体大小被指定为HVGA显示屏。 调整字体的大小相应地，如果我们不同的显示器上运行。 这个方法可以成为单独的方法
 	 */
-
 	public void adjustFontSize(TextView view)
 	{
 		float fontPixelSize = view.getTextSize();
